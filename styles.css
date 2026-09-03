@@ -1,0 +1,63 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: #f4f7fb;
+  color: #1c2a3a;
+}
+#app { max-width: 720px; margin: 0 auto; min-height: 100vh; padding: 24px; }
+.screen { display: none; animation: fadeIn 0.25s ease-in; }
+.screen.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+h1 { font-size: 2.2rem; text-align: center; margin-bottom: 4px; }
+h2 { font-size: 1.4rem; color: #0f5faa; }
+.subtitle { text-align: center; color: #5a6b7d; margin-bottom: 28px; }
+
+.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.lang-btn, .primary-btn, .secondary-btn, .mic-btn {
+  font-size: 1.1rem; padding: 16px; border-radius: 14px; border: none; cursor: pointer;
+}
+.lang-btn { background: white; border: 2px solid #d7e3ef; }
+.lang-btn.selected { border-color: #0f5faa; background: #e8f1fb; }
+.primary-btn { background: #0f5faa; color: white; width: 100%; font-weight: 600; margin-top: 8px; }
+.secondary-btn { background: #eef2f6; color: #1c2a3a; width: 100%; margin-top: 16px; }
+.mic-btn { background: #ff5a5f; color: white; font-size: 1.6rem; width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; }
+.mic-btn.recording { animation: pulse 1s infinite; background: #d32f36; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(211,47,54,.5);} 70% { box-shadow: 0 0 0 14px rgba(211,47,54,0);} 100% {box-shadow: 0 0 0 0 rgba(211,47,54,0);} }
+
+form label { display: block; margin-bottom: 14px; font-weight: 600; }
+form input, form select { width: 100%; padding: 12px; font-size: 1rem; border-radius: 10px; border: 1px solid #ccd6e0; margin-top: 4px; }
+
+.consent-box { background: #fff8e1; border: 1px solid #f0d98c; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+.checkbox-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 1rem; }
+.checkbox-row input { width: 20px; height: 20px; }
+
+.red-flag-banner { background: #ffe1e1; border: 2px solid #ff5a5f; color: #b30000; padding: 12px; border-radius: 10px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+.hidden { display: none !important; }
+
+.chat-window { min-height: 260px; max-height: 40vh; overflow-y: auto; background: white; border-radius: 14px; padding: 14px; border: 1px solid #e2e8f0; margin-bottom: 12px; }
+.msg { padding: 10px 14px; border-radius: 14px; margin-bottom: 10px; max-width: 80%; line-height: 1.4; }
+.msg.assistant { background: #e8f1fb; margin-right: auto; }
+.msg.patient { background: #0f5faa; color: white; margin-left: auto; }
+
+.input-row { display: flex; gap: 10px; align-items: center; }
+.input-row input { flex: 1; padding: 14px; border-radius: 12px; border: 1px solid #ccd6e0; font-size: 1rem; }
+.quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.quick-replies button { padding: 10px 14px; border-radius: 20px; border: 1px solid #0f5faa; background: white; color: #0f5faa; cursor: pointer; }
+
+#doc-list .doc-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; margin-top: 10px; }
+.low-conf { color: #b36b00; font-weight: 700; }
+
+.session-id-note { color: #7a8a9a; font-size: .9rem; }
+
+/* Physician screen */
+.summary-section { background: white; border-radius: 12px; padding: 16px; margin-bottom: 14px; border: 1px solid #e2e8f0; }
+.summary-section h3 { margin-top: 0; color: #0f5faa; }
+.summary-section textarea { width: 100%; min-height: 70px; font-family: inherit; font-size: .95rem; border-radius: 8px; border: 1px solid #ccd6e0; padding: 8px; }
+.ai-note { background: #fff8e1; padding: 10px; border-radius: 8px; font-size: .85rem; color: #7a5c00; margin-bottom: 16px; }
+.action-row { display: flex; gap: 10px; }
+.action-row button { flex: 1; padding: 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
+.btn-accept { background: #1e9e5a; color: white; }
+.btn-amend { background: #0f5faa; color: white; }
+.btn-reject { background: #d32f36; color: white; }

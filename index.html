@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<title>MediKiosk</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- Language + landing -->
+  <section id="screen-landing" class="screen active">
+    <h1>🏥 MediKiosk</h1>
+    <p class="subtitle">Tell us how you're feeling before you see the doctor.</p>
+    <div class="lang-grid">
+      <button class="lang-btn" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="hi">हिन्दी</button>
+      <button class="lang-btn" data-lang="bn">বাংলা</button>
+      <button class="lang-btn" data-lang="ta">தமிழ்</button>
+    </div>
+    <button id="btn-start" class="primary-btn">▶ Start / शुरू करें</button>
+  </section>
+
+  <!-- Step 1: Identify -->
+  <section id="screen-identify" class="screen">
+    <h2>Step 1 of 5 · Who are you?</h2>
+    <form id="form-identify">
+      <label>Full name<input type="text" id="in-name" required /></label>
+      <label>Age<input type="number" id="in-age" min="0" max="120" required /></label>
+      <label>Sex
+        <select id="in-sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label>Department
+        <select id="in-department">
+          <option value="allopathic">General (Allopathic) OPD</option>
+          <option value="ayush">AYUSH / Ayurveda OPD</option>
+        </select>
+      </label>
+      <label>ABHA ID (optional — leave blank if you don't have one)
+        <input type="text" id="in-abha" placeholder="14-digit ABHA number" />
+      </label>
+      <button type="submit" class="primary-btn">Continue →</button>
+    </form>
+  </section>
+
+  <!-- Step 1b: Consent -->
+  <section id="screen-consent" class="screen">
+    <h2>Step 1 of 5 · Your consent</h2>
+    <div class="consent-box">
+      <p id="consent-audio-text">We will record your answers and any documents you share to
+        prepare a summary for your doctor. You can decline any part, and your recording is
+        deleted right after your summary is created.</p>
+      <button id="btn-play-audio" class="secondary-btn">🔊 Play this aloud</button>
+    </div>
+    <label class="checkbox-row"><input type="checkbox" id="c-capture" checked /> I agree to record my history (required)</label>
+    <label class="checkbox-row"><input type="checkbox" id="c-his" checked /> Share my summary with this hospital's records system</label>
+    <label class="checkbox-row"><input type="checkbox" id="c-abha" checked /> Link this visit to my ABHA health record</label>
+    <button id="btn-consent-continue" class="primary-btn">I Agree, Continue →</button>
+  </section>
+
+  <!-- Step 2: Converse -->
+  <section id="screen-converse" class="screen">
+    <h2>Step 2 of 5 · Tell us what's wrong</h2>
+    <div id="red-flag-banner" class="red-flag-banner hidden">
+      ⚠ Please inform staff immediately — a nurse will see you now.
+    </div>
+    <div class="chat-window" id="chat-window"></div>
+    <div class="input-row">
+      <button id="btn-mic" class="mic-btn" title="Tap to speak">🎤</button>
+      <input type="text" id="in-answer" placeholder="Type your answer, or tap the mic to speak..." />
+      <button id="btn-send" class="primary-btn">Send</button>
+    </div>
+    <div id="quick-replies" class="quick-replies"></div>
+    <button id="btn-converse-done" class="secondary-btn">I've said everything → Continue to document scan</button>
+  </section>
+
+  <!-- Step 3: Scan documents -->
+  <section id="screen-scan" class="screen">
+    <h2>Step 3 of 5 · Scan your old documents</h2>
+    <p>Take a photo of any prior prescriptions, lab reports, or discharge summaries.</p>
+    <input type="file" id="in-file" accept="image/*" capture="environment" />
+    <select id="in-doctype">
+      <option value="prescription">Prescription</option>
+      <option value="lab_report">Lab report</option>
+      <option value="discharge_summary">Discharge summary</option>
+      <option value="other">Other</option>
+    </select>
+    <button id="btn-upload" class="primary-btn">Upload & Digitize</button>
+    <div id="doc-list"></div>
+    <button id="btn-scan-done" class="secondary-btn">No more documents → Generate my summary</button>
+  </section>
+
+  <!-- Step 4/5: Patient confirmation -->
+  <section id="screen-done" class="screen">
+    <h2>✅ You're all set!</h2>
+    <p>Your history has been recorded. Please take a seat — the doctor will have your summary
+       ready when you're called in.</p>
+    <p class="session-id-note">Session reference: <span id="final-session-id"></span></p>
+    <button id="btn-restart" class="secondary-btn">Start a new patient</button>
+  </section>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

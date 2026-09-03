@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>MediKiosk — Physician View</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app">
+  <h1 style="font-size:1.6rem;">🩺 Physician Consult Screen</h1>
+  <label>Session ID: <input type="text" id="in-session-id" style="width:100%;padding:10px;margin:8px 0;" placeholder="Paste session reference from kiosk" /></label>
+  <button class="primary-btn" id="btn-load">Load Summary</button>
+
+  <div id="red-flag-note" class="red-flag-banner hidden"></div>
+  <div class="ai-note">This is an AI-generated DRAFT from the pre-consultation kiosk. Review, edit as
+    needed, then Accept / Amend / Reject. Nothing is saved to the hospital record until you decide.</div>
+
+  <div id="summary-container"></div>
+
+  <div class="action-row" id="action-row" style="display:none;">
+    <button class="btn-accept" id="btn-accept">✓ Accept as-is</button>
+    <button class="btn-amend" id="btn-amend">✎ Save my edits</button>
+    <button class="btn-reject" id="btn-reject">✕ Reject draft</button>
+  </div>
+
+  <div id="result-note" style="margin-top:16px;"></div>
+</div>
+<script src="physician.js"></script>
+</body>
+</html>
