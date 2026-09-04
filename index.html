@@ -1,110 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<title>MediKiosk</title>
-<link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediKiosk — AI Clinical History Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="app">
 
-  <!-- Language + landing -->
-  <section id="screen-landing" class="screen active">
-    <h1>🏥 MediKiosk</h1>
-    <p class="subtitle">Tell us how you're feeling before you see the doctor.</p>
-    <div class="lang-grid">
-      <button class="lang-btn" data-lang="en">English</button>
-      <button class="lang-btn" data-lang="hi">हिन्दी</button>
-      <button class="lang-btn" data-lang="bn">বাংলা</button>
-      <button class="lang-btn" data-lang="ta">தமிழ்</button>
+<div class="app">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar glass">
+    <div class="brand">
+      <img src="assets/logo.jpeg" alt="MediKiosk" class="brand-logo">
+      <div class="brand-text">
+        <span class="brand-name">MediKiosk</span>
+        <span class="brand-tag">clinical intake</span>
+      </div>
     </div>
-    <button id="btn-start" class="primary-btn">▶ Start / शुरू करें</button>
-  </section>
 
-  <!-- Step 1: Identify -->
-  <section id="screen-identify" class="screen">
-    <h2>Step 1 of 5 · Who are you?</h2>
-    <form id="form-identify">
-      <label>Full name<input type="text" id="in-name" required /></label>
-      <label>Age<input type="number" id="in-age" min="0" max="120" required /></label>
-      <label>Sex
-        <select id="in-sex">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+    <nav class="menu">
+      <button class="menu-item active" data-screen="identify">
+        <span class="menu-icon icon-id"><svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="4"/><circle cx="17" cy="24" r="5"/><path d="M10 33c1-4 4-6 7-6s6 2 7 6"/><line x1="27" y1="18" x2="38" y2="18"/><line x1="27" y1="24" x2="38" y2="24"/><line x1="27" y1="30" x2="34" y2="30"/></svg></span>
+        <span>Identify</span>
+      </button>
+      <button class="menu-item" data-screen="converse">
+        <span class="menu-icon icon-stethoscope"><svg viewBox="0 0 48 48"><path d="M14 6v12a8 8 0 0 0 16 0V6"/><circle cx="14" cy="6" r="2.4"/><circle cx="30" cy="6" r="2.4"/><path d="M22 26v6a9 9 0 0 0 18 0v-3"/><circle cx="40" cy="29" r="4"/></svg></span>
+        <span>Converse</span>
+      </button>
+      <button class="menu-item" data-screen="scan">
+        <span class="menu-icon icon-rx"><svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="3"/><path d="M15 14h9a5 5 0 0 1 0 10h-9z"/><path d="M15 24v12"/><path d="M24 24l9 12"/><line x1="15" y1="40" x2="33" y2="40"/></svg></span>
+        <span>Scan Docs</span>
+      </button>
+      <button class="menu-item" data-screen="summary">
+        <span class="menu-icon icon-tablets"><svg viewBox="0 0 48 48"><ellipse cx="16" cy="16" rx="10" ry="10" transform="rotate(-45 16 16)"/><line x1="9" y1="16" x2="23" y2="16"/><ellipse cx="32" cy="32" rx="10" ry="6" transform="rotate(-45 32 32)"/></svg></span>
+        <span>Summary</span>
+      </button>
+      <button class="menu-item" data-screen="consult">
+        <span class="menu-icon icon-consult"><svg viewBox="0 0 48 48"><circle cx="24" cy="14" r="7"/><path d="M10 40c1-9 7-14 14-14s13 5 14 14"/><path d="M31 22l5 5-9 9-6 1 1-6z"/></svg></span>
+        <span>Consult</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="lang-pill">
+        <span>भाषा</span>
+        <select id="langSelect">
+          <option>English</option>
+          <option>हिन्दी</option>
+          <option>বাংলা</option>
+          <option>தமிழ்</option>
         </select>
-      </label>
-      <label>Department
-        <select id="in-department">
-          <option value="allopathic">General (Allopathic) OPD</option>
-          <option value="ayush">AYUSH / Ayurveda OPD</option>
-        </select>
-      </label>
-      <label>ABHA ID (optional — leave blank if you don't have one)
-        <input type="text" id="in-abha" placeholder="14-digit ABHA number" />
-      </label>
-      <button type="submit" class="primary-btn">Continue →</button>
-    </form>
-  </section>
-
-  <!-- Step 1b: Consent -->
-  <section id="screen-consent" class="screen">
-    <h2>Step 1 of 5 · Your consent</h2>
-    <div class="consent-box">
-      <p id="consent-audio-text">We will record your answers and any documents you share to
-        prepare a summary for your doctor. You can decline any part, and your recording is
-        deleted right after your summary is created.</p>
-      <button id="btn-play-audio" class="secondary-btn">🔊 Play this aloud</button>
+      </div>
+      <p class="foot-note">ABDM · FHIR linked</p>
     </div>
-    <label class="checkbox-row"><input type="checkbox" id="c-capture" checked /> I agree to record my history (required)</label>
-    <label class="checkbox-row"><input type="checkbox" id="c-his" checked /> Share my summary with this hospital's records system</label>
-    <label class="checkbox-row"><input type="checkbox" id="c-abha" checked /> Link this visit to my ABHA health record</label>
-    <button id="btn-consent-continue" class="primary-btn">I Agree, Continue →</button>
-  </section>
+  </aside>
 
-  <!-- Step 2: Converse -->
-  <section id="screen-converse" class="screen">
-    <h2>Step 2 of 5 · Tell us what's wrong</h2>
-    <div id="red-flag-banner" class="red-flag-banner hidden">
-      ⚠ Please inform staff immediately — a nurse will see you now.
-    </div>
-    <div class="chat-window" id="chat-window"></div>
-    <div class="input-row">
-      <button id="btn-mic" class="mic-btn" title="Tap to speak">🎤</button>
-      <input type="text" id="in-answer" placeholder="Type your answer, or tap the mic to speak..." />
-      <button id="btn-send" class="primary-btn">Send</button>
-    </div>
-    <div id="quick-replies" class="quick-replies"></div>
-    <button id="btn-converse-done" class="secondary-btn">I've said everything → Continue to document scan</button>
-  </section>
+  <!-- ===================== MAIN ===================== -->
+  <main class="main">
 
-  <!-- Step 3: Scan documents -->
-  <section id="screen-scan" class="screen">
-    <h2>Step 3 of 5 · Scan your old documents</h2>
-    <p>Take a photo of any prior prescriptions, lab reports, or discharge summaries.</p>
-    <input type="file" id="in-file" accept="image/*" capture="environment" />
-    <select id="in-doctype">
-      <option value="prescription">Prescription</option>
-      <option value="lab_report">Lab report</option>
-      <option value="discharge_summary">Discharge summary</option>
-      <option value="other">Other</option>
-    </select>
-    <button id="btn-upload" class="primary-btn">Upload & Digitize</button>
-    <div id="doc-list"></div>
-    <button id="btn-scan-done" class="secondary-btn">No more documents → Generate my summary</button>
-  </section>
+    <header class="topbar glass">
+      <div class="topbar-left">
+        <h1 id="screenTitle">Identify Patient</h1>
+        <p id="screenSub">Scan your ABHA ID or register in seconds</p>
+      </div>
+      <div class="topbar-right">
+        <div class="consent-toggle">
+          <label class="switch">
+            <input type="checkbox" id="consentSwitch">
+            <span class="slider"></span>
+          </label>
+          <span>Consent granted</span>
+        </div>
+      </div>
+    </header>
 
-  <!-- Step 4/5: Patient confirmation -->
-  <section id="screen-done" class="screen">
-    <h2>✅ You're all set!</h2>
-    <p>Your history has been recorded. Please take a seat — the doctor will have your summary
-       ready when you're called in.</p>
-    <p class="session-id-note">Session reference: <span id="final-session-id"></span></p>
-    <button id="btn-restart" class="secondary-btn">Start a new patient</button>
-  </section>
+    <!-- ---------- SCREEN 1: IDENTIFY ---------- -->
+    <section class="screen active" id="screen-identify">
+      <div class="grid-two">
+        <div class="panel glass">
+          <h2>Patient identification</h2>
+          <div class="field">
+            <label>ABHA ID / Aadhaar</label>
+            <input type="text" placeholder="14-2345-6789-0123">
+          </div>
+          <div class="field">
+            <label>Full name</label>
+            <input type="text" placeholder="Patient's name">
+          </div>
+          <div class="field">
+            <label>Preferred language</label>
+            <input type="text" placeholder="e.g. Hindi, Bengali, English" value="English">
+          </div>
+          <button class="btn-primary" id="btnIdentify">Verify &amp; continue</button>
+          <p class="hint">New patient? You can register without an ABHA ID and link it later.</p>
+        </div>
 
+        <div class="panel glass center-panel">
+          <h2>Buffering</h2>
+          <p class="muted">Verifying your health account with ABDM…</p>
+          <div class="bottle-wrap">
+            <svg class="bottle" viewBox="0 0 140 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <clipPath id="bottleClip">
+                  <path d="M55 8 H85 V38 C85 45 100 50 100 75 V225 C100 240 88 250 70 250 C52 250 40 240 40 225 V75 C40 50 55 45 55 38 Z"/>
+                </clipPath>
+                <linearGradient id="liquidGrad" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="#1D8FD6"/>
+                  <stop offset="100%" stop-color="#6FD4E8"/>
+                </linearGradient>
+              </defs>
+              <path class="bottle-outline" d="M55 8 H85 V38 C85 45 100 50 100 75 V225 C100 240 88 250 70 250 C52 250 40 240 40 225 V75 C40 50 55 45 55 38 Z"/>
+              <rect x="50" y="2" width="40" height="10" rx="3" class="bottle-cap"/>
+              <g clip-path="url(#bottleClip)">
+                <rect id="liquidRect" x="30" y="250" width="80" height="0" fill="url(#liquidGrad)"/>
+                <circle class="bubble b1" cx="60" cy="240" r="3"/>
+                <circle class="bubble b2" cx="78" cy="240" r="2.2"/>
+                <circle class="bubble b3" cx="68" cy="240" r="2.6"/>
+              </g>
+            </svg>
+            <div class="bottle-percent" id="bufferPercent">0%</div>
+          </div>
+          <p class="muted small">This fill level mirrors every AI processing step across the kiosk — verification, transcription, OCR and summary generation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SCREEN 2: CONVERSE ---------- -->
+    <section class="screen" id="screen-converse">
+      <div class="grid-two">
+        <div class="panel glass chat-panel">
+          <h2>Tell us what's bothering you</h2>
+          <p class="muted">Speak naturally or tap an option — MediKiosk asks the same follow-ups a doctor would.</p>
+          <div class="chat-window" id="chatWindow"></div>
+          <div class="chat-input-row">
+            <button class="mic-btn" id="micBtn" title="Speak">
+              <svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+            </button>
+            <input type="text" id="chatInput" placeholder="Type or tap the mic to speak…">
+            <button class="btn-primary small" id="chatSend">Send</button>
+          </div>
+          <div class="chip-row" id="chipRow"></div>
+        </div>
+
+        <div class="panel glass">
+          <h2>Live history draft</h2>
+          <p class="muted">Builds automatically as you talk</p>
+          <ul class="history-list" id="historyList">
+            <li data-key="complaint"><span class="hk">Chief complaint</span><span class="hv">—</span></li>
+            <li data-key="onset"><span class="hk">Onset</span><span class="hv">—</span></li>
+            <li data-key="character"><span class="hk">Character</span><span class="hv">—</span></li>
+            <li data-key="radiation"><span class="hk">Radiation</span><span class="hv">—</span></li>
+            <li data-key="severity"><span class="hk">Severity</span><span class="hv">—</span></li>
+            <li data-key="ayush"><span class="hk">Prakriti (AYUSH)</span><span class="hv">—</span></li>
+          </ul>
+          <div class="redflag" id="redFlag" hidden>
+            <span class="rf-dot"></span> Red flag detected — triage alerted
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SCREEN 3: SCAN DOCS ---------- -->
+    <section class="screen" id="screen-scan">
+      <div class="grid-two">
+        <div class="panel glass">
+          <h2>Digitize your documents</h2>
+          <p class="muted">Prescriptions, lab reports and discharge summaries — any language, even handwritten.</p>
+          <label class="dropzone" id="dropzone">
+            <svg viewBox="0 0 48 48" class="dz-icon"><rect x="8" y="4" width="32" height="40" rx="3"/><path d="M15 14h9a5 5 0 0 1 0 10h-9z"/><path d="M15 24v12"/></svg>
+            <span>Drop files here or tap to upload</span>
+            <input type="file" id="fileInput" multiple hidden>
+          </label>
+          <div class="upload-list" id="uploadList"></div>
+        </div>
+
+        <div class="panel glass">
+          <h2>Extracted &amp; timelined</h2>
+          <p class="muted">AI structures every document automatically</p>
+          <div class="timeline" id="timeline">
+            <p class="muted small">Upload a document to see it extracted here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SCREEN 4: SUMMARY ---------- -->
+    <section class="screen" id="screen-summary">
+      <div class="panel glass summary-panel">
+        <div class="summary-head">
+          <h2>Physician-ready summary</h2>
+          <button class="btn-secondary" id="regenBtn">Regenerate</button>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-card"><h3>Chief complaint</h3><p id="sumComplaint">Not captured yet — visit Converse.</p></div>
+          <div class="summary-card"><h3>History of present illness</h3><p id="sumHpi">Not captured yet.</p></div>
+          <div class="summary-card"><h3>Past medical / surgical</h3><p>No prior surgeries reported. Hypertension, diagnosed 2022.</p></div>
+          <div class="summary-card"><h3>Drug &amp; allergy history</h3><p>Amlodipine 5mg OD. No known drug allergies.</p></div>
+          <div class="summary-card"><h3>Family history</h3><p>Father — Type 2 diabetes. Mother — none reported.</p></div>
+          <div class="summary-card"><h3>Prior investigations</h3><p id="sumLabs">No documents scanned yet.</p></div>
+        </div>
+        <div class="summary-actions">
+          <button class="btn-primary" id="pushBtn">Push to HIS &amp; ABHA</button>
+          <span class="push-status" id="pushStatus"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SCREEN 5: CONSULT ---------- -->
+    <section class="screen" id="screen-consult">
+      <div class="panel glass consult-panel">
+        <h2>Physician view</h2>
+        <p class="muted">Complete history, ready the moment the patient enters the room.</p>
+        <div class="consult-card">
+          <div class="consult-row"><span>Patient</span><strong id="cPatient">—</strong></div>
+          <div class="consult-row"><span>Chief complaint</span><strong id="cComplaint">—</strong></div>
+          <div class="consult-row"><span>Time saved this consult</span><strong>≈ 4 min</strong></div>
+        </div>
+        <div class="consult-buttons">
+          <button class="btn-secondary">Amend</button>
+          <button class="btn-primary">Accept &amp; start consult</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </div>
-<script src="app.js"></script>
+
+<script src="js/script.js"></script>
 </body>
 </html>
